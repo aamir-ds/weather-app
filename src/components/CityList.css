@@ -1,0 +1,9 @@
+.city-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: rgb(221, 92, 17); */
+    margin-right: auto;
+    margin-left: auto;
+    cursor: pointer;
+}
