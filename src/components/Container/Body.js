@@ -4,10 +4,10 @@ import Fab from '@mui/material/Fab';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from 'react';
-import CityList from './CityList';
-import Input from './Input';
-import Error from './Error';
-import WeatherData from './WeatherData';
+import CityList from '../City listing/CityList';
+import Input from '../Input/Input';
+import Error from '../Data dispaly/Error';
+import WeatherData from '../Data dispaly/WeatherData';
 import './Body.css'
 
 function Body() {
@@ -63,13 +63,13 @@ function Body() {
       onChange={handleChange} 
       value={name} 
       onClick={handleName} />
-        {newArr.map((ele, i)=>
-            <CityList name={ele} 
-                key={i}
-                clickCity={()=> handleCity(ele)}
-                delete={()=> handleDelete(i)}
-            />
-        )} 
+    {newArr.map((ele, i)=>
+        <CityList name={ele} 
+            key={i}
+            clickCity={()=> handleCity(ele)}
+            delete={()=> handleDelete(i)}
+        />
+    )} 
 
     {typeof weatherData.main === 'undefined' ?
     <>

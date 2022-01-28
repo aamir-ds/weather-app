@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import TextField from '@mui/material/TextField';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import Typography from '@mui/material/Typography';
-import Body from './components/Body';
+import Body from './components/Container/Body';
 
 
 
