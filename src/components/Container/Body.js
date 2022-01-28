@@ -1,32 +1,24 @@
-import AddIcon from '@mui/icons-material/Add';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import Fab from '@mui/material/Fab';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from 'react';
 import CityList from '../City listing/CityList';
-import Input from '../Input/Input';
 import Error from '../Data dispaly/Error';
 import WeatherData from '../Data dispaly/WeatherData';
-import './Body.css'
+import Input from '../Input/Input';
+import './Body.css';
 
 function Body() {
 
-
-  const apiKey = 'ee912718a09177137817d83ba0c7d376'
   const [weatherData, setWeatherData] = useState([{}]);
   const [city, setCity] = useState('');
-
   const [name, setName] = useState('');
-  const [newArr, setNewArr] = useState([]);
-
+  const [cities, setCities] = useState([]);
 
   const handleChange =(e)=>{
     setName(e.target.value);
   }
 
   const handleName =()=>{
-    if(name){setNewArr(prev =>{
+    if(name){setCities(prev =>{
       return [...prev, name]
     } )}
     setName('')
@@ -47,7 +39,7 @@ function Body() {
   }
 
   const handleDelete =(id)=>{
-    setNewArr(prev =>{
+    setCities(prev =>{
       return prev.filter(
         (item, index)=>{
           return index !== id;
@@ -63,7 +55,7 @@ function Body() {
       onChange={handleChange} 
       value={name} 
       onClick={handleName} />
-    {newArr.map((ele, i)=>
+    {cities.map((ele, i)=>
         <CityList name={ele} 
             key={i}
             clickCity={()=> handleCity(ele)}
@@ -73,21 +65,16 @@ function Body() {
 
     {typeof weatherData.main === 'undefined' ?
     <>
-        {newArr.length === 0 && 
-            <Typography variant="h6" gutterBottom component="div">
+        {cities.length === 0 && 
+            <Typography variant="h6" gutterBottom component="div" style={{marginTop:'15%'}}>
             Welcome to weather app
             </Typography>
         }
     </>
-    : (
-      <WeatherData name={weatherData.name} temp={weatherData.main.temp}/>
-    )
-    }
-    { weatherData.cod === '404'? 
-    <Error/>
     : 
-    <></>
+      <WeatherData name={weatherData.name} temp={weatherData.main.temp}/>
     }
+    {(cities.length > 0) && weatherData.cod === '404'? <Error/>:<></>}
 
   </div>)
 }
